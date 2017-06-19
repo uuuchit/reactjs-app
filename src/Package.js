@@ -7,6 +7,7 @@ class Package extends Component{
 
     componentDidUpdate(){
     console.log(this.props);
+    //checking orgin master of git .. dont worry
 
     }
     action(){
