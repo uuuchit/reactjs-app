@@ -1,6 +1,8 @@
-<h2>Installation</h2>
-```
-    git clone "https://github.com/uuuchit/reactjs-app.git"
-    npm install
-    npm start
-```
+# Installation
+`git clone "https://github.com/uuuchit/reactjs-app.git"`
+   
+`npm install`
+  
+`npm start`
+
+# It is a react with redux learing app. 
