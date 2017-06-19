@@ -1,7 +1,7 @@
-export function firstAction(){
+export function getDetail(id){
     return {
-        type: 'INC',
-        payload: 1
+        type: 'DETAIL',
+        payload: id
     }
 }
 export function secondAction(){

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {firstAction} from './action';
-import {secondAction} from './action'
+import * as actions from './action';
+import Pdetail from './Pdetail'
 
 class Package extends Component{
 
@@ -10,23 +10,49 @@ class Package extends Component{
     //checking orgin master of git .. dont worry
 
     }
-    action(){
-        this.props.dispatch(firstAction())
+    getDetail(item){
+        this.props.dispatch(actions.getDetail(item))
     }
     actiontwo(){
-        this.props.dispatch(secondAction());
+        this.props.dispatch(actions.secondAction());
+    }
+    renderPackageList(){
+        return this.props.packages.map(
+            (item)=>{
+                return (
+                    <div className="col-md-3" onClick={this.getDetail.bind(this,item)}>
+                        <h2>{item.name}</h2>
+                        <img src={item.imageUrl} className="img-responsive"/>
+                        <p>{item.description}</p>
+                    </div>
+                )
+            }
+        )
     }
     render(){
         return (
         <div>
             <h2>Test</h2>
-            <h2>{this.props.test}{this.props.value}</h2>
-            <button onClick={this.action.bind(this)}>Increment</button>
-            <button onClick={this.actiontwo.bind(this)}>Decrement</button>
-            
+            <div className="row list">
+                {this.renderPackageList()}
+            </div>
+            <div className="detail">
+                <Pdetail/>
+                {/*{this.props.activePackage && 
+                <div>
+                    <h1>Selected Package</h1>
+                    <h2>{this.props.activePackage.name}</h2>
+                    <p>Price :{this.getPrice()}</p>
+                </div>
+                }*/}
+            </div>
         </div>
         )
     }
 }
-
-export default connect(state => state)(Package);
+function mapStateToProps(state){
+    return {
+        packages: state.packages
+    }
+}
+export default connect(mapStateToProps)(Package);
