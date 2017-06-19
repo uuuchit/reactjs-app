@@ -16,7 +16,8 @@ class Search extends Component{
             
             ], 
         searchText: '',
-        result: []
+        result: [],
+        selectedLocation: {}
      }
      this.searching = this.searching.bind(this);
     }
@@ -25,10 +26,16 @@ class Search extends Component{
         return this.state.result.map(
             (item) =>{
                 return (
-                    <li>{item.location}</li>
+                    <li onClick={this.selectLocation.bind(this, item)}>{item.location}</li>
                 )
             }
         )
+    }
+    selectLocation(item){
+        this.setState({searchText: item.location});
+        this.setState({
+            selectedLocation: item
+        })
     }
     searching(event) {
         //console.log(this.state.searchText);
@@ -52,6 +59,9 @@ class Search extends Component{
                   this.state.searchText!=='' &&
                     <ul className="result-box">
                         {this.getResult()}
+                        {this.state.result.length < 1 &&
+                            <p>No result found!!</p>
+                        }
                     </ul>
                    
                 }
